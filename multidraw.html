@@ -81,11 +81,15 @@ var super_awesome_multitouch_drawing_canvas_thingy = new CanvasDrawr({
   size: 15
 });
 function handleTouch() {
-  var commit = 'v2.0.1';
-  var scriptTag = document.createElement('script');
-  scriptTag.type = 'text/javascript';
-  scriptTag.src = 'https://raw.github.com/brian-c/phantom-limb/' + commit + '/phantom-limb.js';
-  document.body.appendChild(scriptTag);
+  if ('ontouchstart' in document.documentElement) {
+    alert("Your device handles touch already!")
+  } else {
+    // simulate touch for mouse input using Brian Carstensen's Phantom Limb script
+    var scriptTag = document.createElement('script');
+    scriptTag.type = 'text/javascript';
+    scriptTag.src = 'https://raw.github.com/brian-c/phantom-limb/' + commit + '/phantom-limb.js';
+    document.body.appendChild(scriptTag);
+  }
 }
 </script>
 </body>
