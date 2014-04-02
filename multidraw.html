@@ -15,7 +15,7 @@
 <style media="screen">canvas{border:1px solid #ccc}</style>
 <canvas id="example" height=300 width=300></canvas>
 <p>Based on <a href="http://www.paulirish.com/demo/multi">http://www.paulirish.com/demo/multi</a></p>
-<p id="simulate"><a href="javascript:void(handleTouch())">Simulate Touch</a> /</p>
+<p id="simulate"><a href="javascript:void(handleTouch())">Simulate Touch</a></p>
 <script>
 var CanvasDrawr = function (options) {
   console.log(options);
@@ -82,7 +82,7 @@ var super_awesome_multitouch_drawing_canvas_thingy = new CanvasDrawr({
 });
 function handleTouch() {
   if ('ontouchstart' in document.documentElement) {
-    alert("Your device handles touch already!")
+    //alert("Your device handles touch already!")
   } else {
     // simulate touch for mouse input using Brian Carstensen's Phantom Limb script
     var commit = 'v2.0.1';
