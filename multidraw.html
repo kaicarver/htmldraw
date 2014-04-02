@@ -10,6 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <h2>Multitouch Canvas Fingerpaint Demo</h2>
 <p>
+<a href="javascript:void(handleTouch())">Simulate Touch</a> /
 <a href="javascript:void(window.open().location = document.getElementsByTagName('canvas')[0].toDataURL('image/png'))">Save drawing</a>
 </p>
 <style media="screen">canvas{border:1px solid #ccc}</style>
@@ -34,20 +35,10 @@ var CanvasDrawr = function (options) {
       canvas.addEventListener('touchstart', self.preDraw, false);
       canvas.addEventListener('touchmove', self.draw, false);
     },
-    handleMouse: function() {
-      if (!'ontouchstart' in document.documentElement) {
-        // simulate touch for mouse input using Brian Carstensen's Phantom Limb script
-        var commit = 'v2.0.1';
-        var scriptTag = document.createElement('script');
-        scriptTag.type = 'text/javascript';
-        scriptTag.src = 'https://raw.github.com/brian-c/phantom-limb/' + commit + '/phantom-limb.js';
-        document.body.appendChild(scriptTag);
-      }
-    },
     preDraw: function (event) {
       $.each(event.touches, function (i, touch) {
         var id = touch.identifier,
-          colors = ["red", "green", "yellow", "blue", "magenta"],
+          colors = ["red", "green", "yellow", "blue", "magenta", "orangered"],
           mycolor = colors[Math.floor(Math.random() * colors.length)];
         lines[id] = {
           x: this.pageX - offset.left,
@@ -89,9 +80,10 @@ var super_awesome_multitouch_drawing_canvas_thingy = new CanvasDrawr({
   id: "example",
   size: 15
 });
-super_awesome_multitouch_drawing_canvas_thingy.handleMouse();
 function handleTouch() {
-  if (!'ontouchstart' in document.documentElement) {
+  if ('ontouchstart' in document.documentElement) {
+    alert("Your device handles touch already!")
+  } else {
     // simulate touch for mouse input using Brian Carstensen's Phantom Limb script
     var commit = 'v2.0.1';
     var scriptTag = document.createElement('script');
