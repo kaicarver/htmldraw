@@ -33,7 +33,16 @@ var CanvasDrawr = function (options) {
     init: function () {
       canvas.addEventListener('touchstart', self.preDraw, false);
       canvas.addEventListener('touchmove', self.draw, false);
-      handletouch();
+    },
+    handleMouse: function() {
+      if (!'ontouchstart' in document.documentElement) {
+        // simulate touch for mouse input using Brian Carstensen's Phantom Limb script
+        var commit = 'v2.0.1';
+        var scriptTag = document.createElement('script');
+        scriptTag.type = 'text/javascript';
+        scriptTag.src = 'https://raw.github.com/brian-c/phantom-limb/' + commit + '/phantom-limb.js';
+        document.body.appendChild(scriptTag);
+      }
     },
     preDraw: function (event) {
       $.each(event.touches, function (i, touch) {
@@ -80,6 +89,7 @@ var super_awesome_multitouch_drawing_canvas_thingy = new CanvasDrawr({
   id: "example",
   size: 15
 });
+super_awesome_multitouch_drawing_canvas_thingy.handleMouse();
 function handleTouch() {
   if (!'ontouchstart' in document.documentElement) {
     // simulate touch for mouse input using Brian Carstensen's Phantom Limb script
