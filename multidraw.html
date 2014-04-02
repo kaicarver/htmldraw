@@ -33,6 +33,7 @@ var CanvasDrawr = function (options) {
     init: function () {
       canvas.addEventListener('touchstart', self.preDraw, false);
       canvas.addEventListener('touchmove', self.draw, false);
+      handletouch();
     },
     preDraw: function (event) {
       $.each(event.touches, function (i, touch) {
@@ -89,7 +90,6 @@ function handleTouch() {
     document.body.appendChild(scriptTag);
   }
 }
-setTimeout(handleTouch,1000);
 </script>
 </body>
 </html>
