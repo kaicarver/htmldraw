@@ -10,7 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <h2>Multitouch Canvas Fingerpaint Demo</h2>
 <p>
-<a href="javascript:void(handleTouch())">Simulate Touch</a> /
 <a href="javascript:void(window.open().location = document.getElementsByTagName('canvas')[0].toDataURL('image/png'))">Save drawing</a>
 </p>
 <style media="screen">canvas{border:1px solid #ccc}</style>
@@ -38,7 +37,7 @@ var CanvasDrawr = function (options) {
     preDraw: function (event) {
       $.each(event.touches, function (i, touch) {
         var id = touch.identifier,
-          colors = ["red", "green", "yellow", "blue", "magenta", "orangered"],
+          colors = ["red", "green", "yellow", "blue", "magenta"],
           mycolor = colors[Math.floor(Math.random() * colors.length)];
         lines[id] = {
           x: this.pageX - offset.left,
@@ -81,9 +80,7 @@ var super_awesome_multitouch_drawing_canvas_thingy = new CanvasDrawr({
   size: 15
 });
 function handleTouch() {
-  if ('ontouchstart' in document.documentElement) {
-    alert("Your device handles touch already!")
-  } else {
+  if (!'ontouchstart' in document.documentElement) {
     // simulate touch for mouse input using Brian Carstensen's Phantom Limb script
     var commit = 'v2.0.1';
     var scriptTag = document.createElement('script');
@@ -92,6 +89,7 @@ function handleTouch() {
     document.body.appendChild(scriptTag);
   }
 }
+handleTouch();
 </script>
 </body>
 </html>
