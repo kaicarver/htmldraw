@@ -10,6 +10,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <h2>Multitouch Canvas Fingerpaint Demo</h2>
 <p>
+<button id="b1" class="lineWidth">1</button>
+<button id="b1" class="lineWidth">2</button>
+<button id="b1" class="lineWidth">5</button>
+<button id="b2" class="lineWidth">10</button>
+<button id="b3" class="lineWidth">15</button>
+<button id="b4" class="lineWidth">25</button>
+<button id="b4" class="lineWidth">50</button>
+<button id="b4" class="lineWidth">100</button>
 <a href="javascript:void(window.open().location = document.getElementsByTagName('canvas')[0].toDataURL('image/png'))">Save drawing</a>
 </p>
 <style media="screen">canvas{border:1px solid #ccc}</style>
@@ -18,9 +26,11 @@
 <p id="simulate"><a href="javascript:void(handleTouch())">Simulate Touch</a></p>
 <script>
 var CanvasDrawr = function (options) {
-  console.log(options);
-  var canvas = document.getElementById(options.id)
-  var ctxt = canvas.getContext("2d");
+	console.log(options);
+	var canvas = document.getElementById(options.id)
+	this.ctxt = canvas.getContext("2d");
+	var ctxt = this.ctxt;
+	this.lineWidth = function(width) { ctxt.lineWidth = width; return ctxt.lineWidth; }
   canvas.style.width = '100%';
   canvas.width = canvas.offsetWidth;
   canvas.style.width = '';
@@ -76,7 +86,7 @@ var CanvasDrawr = function (options) {
   };
   return self.init();
 };
-var super_awesome_multitouch_drawing_canvas_thingy = new CanvasDrawr({
+var drawarea = new CanvasDrawr({
   id: "example",
   size: 15
 });
@@ -93,7 +103,11 @@ function handleTouch() {
   }
   document.getElementById("simulate").style.display = "none";
 }
-//window.onload = handleTouch;
+function setWidthFromButton() {
+	drawarea.lineWidth(this.innerText)
+}
+$("button.lineWidth").bind({ click: function() { drawarea.lineWidth(this.innerText) } });
+window.onload = handleTouch;
 </script>
 </body>
 </html>
