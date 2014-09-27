@@ -4,6 +4,7 @@
 <title>Multitouch Canvas Fingerpaint Demo</title>
 <meta charset="UTF-8">
 <script src="jquery-1.9.1.min.js"></script>
+<script src="phantom-limb.js"></script>
 </head>
 <body>
 <div id="content">
@@ -22,8 +23,12 @@
 </p>
 <style media="screen">canvas{border:1px solid #ccc}</style>
 <canvas id="example" height=300 width=300></canvas>
+<p>Press Esc key to toggle multi-touch simulation mode on desktop.
+Pressing Alt engages the second finger.
+Pressing Shift locks the second finger's position relative to the first's.</p>
 <p>Based on <a href="http://www.paulirish.com/demo/multi">http://www.paulirish.com/demo/multi</a></p>
-<p id="simulate"><a href="javascript:void(handleTouch())">Simulate Touch</a></p>
+<!--<p id="simulate"><a href="javascript:void(handleTouch())">Simulate Touch</a></p>-->
+		
 <script>
 var CanvasDrawr = function (options) {
 	console.log(options);
@@ -94,20 +99,21 @@ function handleTouch() {
   if ('ontouchstart' in document.documentElement) {
     //alert("Your device handles touch already!")
   } else {
-    // simulate touch for mouse input using Brian Carstensen's Phantom Limb script
-    var commit = 'v2.0.1';
+    // simulate touch for mouse input using Brian Carstensen's Phantom Limb script https://github.com/brian-c/phantom-limb
+    /*
     var scriptTag = document.createElement('script');
     scriptTag.type = 'text/javascript';
-    scriptTag.src = 'https://raw.github.com/brian-c/phantom-limb/' + commit + '/phantom-limb.js';
+	  scriptTag.src = 'phantom-limb.js';
     document.body.appendChild(scriptTag);
+    */
   }
-  document.getElementById("simulate").style.display = "none";
+  //document.getElementById("simulate").style.display = "none";
 }
 function setWidthFromButton() {
 	drawarea.lineWidth(this.innerText)
 }
 $("button.lineWidth").bind({ click: function() { drawarea.lineWidth(this.innerText) } });
-window.onload = handleTouch;
+//window.onload = handleTouch;
 </script>
 </body>
 </html>
