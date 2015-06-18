@@ -10,18 +10,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <h2>Multitouch Canvas Fingerpaint Demo</h2>
 <p>
+<span>
 <button id="b1" class="lineWidth">1</button>
-<button id="b1" class="lineWidth">2</button>
-<button id="b1" class="lineWidth">5</button>
-<button id="b2" class="lineWidth">10</button>
-<button id="b3" class="lineWidth">15</button>
-<button id="b4" class="lineWidth">25</button>
-<button id="b4" class="lineWidth">50</button>
-<button id="b4" class="lineWidth">100</button>
+<button id="b2" class="lineWidth">2</button>
+<button id="b3" class="lineWidth">5</button>
+<button id="b4" class="lineWidth">10</button>
+<button id="b5" class="lineWidth">15</button>
+<button id="b6" class="lineWidth">25</button>
+<button id="b7" class="lineWidth">50</button>
+<button id="b8" class="lineWidth">100</button>
+</span>
+<span>
+<button id="c1" class="lineColor">black</button>
+<button id="c1" class="lineColor">any color</button>
+</span>
+
 <a href="javascript:void(window.open().location = document.getElementsByTagName('canvas')[0].toDataURL('image/png'))">Save drawing</a>
 </p>
 <style media="screen">canvas{border:1px solid #ccc}</style>
-<canvas id="example" height=300 width=300></canvas>
+<canvas id="example" height=400 width=300></canvas>
 <p>Based on <a href="http://www.paulirish.com/demo/multi">http://www.paulirish.com/demo/multi</a></p>
 <p id="simulate"><a href="javascript:void(handleTouch())">Simulate Touch</a></p>
 <script>
@@ -31,6 +38,7 @@ var CanvasDrawr = function (options) {
 	this.ctxt = canvas.getContext("2d");
 	var ctxt = this.ctxt;
 	this.lineWidth = function(width) { ctxt.lineWidth = width; return ctxt.lineWidth; }
+	this.lineColor = function(color) { ctxt.lineColor = color; return ctxt.lineColor; }
   canvas.style.width = '100%';
   canvas.width = canvas.offsetWidth;
   canvas.style.width = '';
@@ -48,8 +56,9 @@ var CanvasDrawr = function (options) {
     preDraw: function (event) {
       $.each(event.touches, function (i, touch) {
         var id = touch.identifier,
-          colors = ["red", "green", "yellow", "blue", "magenta", "orangered"],
-          mycolor = colors[Math.floor(Math.random() * colors.length)];
+	    colors = ["red", "green", "yellow", "blue", "magenta", "orangered"],
+	    mycolor = colors[Math.floor(Math.random() * colors.length)];
+	if (ctxt.lineColor=="black") { mycolor = "black"; }
         lines[id] = {
           x: this.pageX - offset.left,
           y: this.pageY - offset.top,
@@ -101,12 +110,23 @@ function handleTouch() {
     scriptTag.src = 'https://raw.github.com/brian-c/phantom-limb/' + commit + '/phantom-limb.js';
     document.body.appendChild(scriptTag);
   }
-  document.getElementById("simulate").style.display = "none";
+  //document.getElementById("simulate").style.display = "none";
 }
 function setWidthFromButton() {
 	drawarea.lineWidth(this.innerText)
 }
-$("button.lineWidth").bind({ click: function() { drawarea.lineWidth(this.innerText) } });
+  $("button.lineWidth").bind({ click: function() { drawarea.lineWidth(this.innerText);
+						   // presentation stuff: highlight the selected button
+						   var buttons = this.parentNode.children;
+						   for (var i = 0; i < buttons.length; i++) {
+						     buttons[i].style.fontWeight = '';
+						     buttons[i].style.backgroundColor = '';
+						   }
+						   this.style.fontWeight = "bold";
+						   this.style.backgroundColor = "lightgray";
+						 } });
+  $("button.lineColor").bind({ click: function() { drawarea.lineColor(this.innerText);
+						 } });
 window.onload = handleTouch;
 </script>
 </body>
