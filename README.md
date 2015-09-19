@@ -5,7 +5,7 @@ A simple web app for drawing with touch.
 
 Try it: 
 [touch draw](http://htmlpreview.github.io/?https://github.com/kaicarver/htmldraw/blob/master/draw.html) /
-[multitouch draw](http://htmlpreview.github.io/?https://github.com/kaicarver/htmldraw/blob/master/multidraw.html)
+[multitouch draw](http://rawgit.com/kaicarver/htmldraw/master/multidraw.html)
 
 
 Originally from "html5 canvas drawing on ipad" by Will Perkins  

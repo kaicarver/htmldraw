@@ -1,46 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Multitouch Canvas Fingerpaint Demo</title>
+<title>Multitouch Paint</title>
 <meta charset="UTF-8">
 <script src="jquery-1.9.1.min.js"></script>
-<script src="phantom-limb.js"></script>
+<style media="screen">
+  canvas { border: 1px solid #ccc; }
+</style>
 </head>
 <body>
 <div id="content">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<h2>Multitouch Canvas Fingerpaint Demo</h2>
+<h2>Multitouch Paint</h2>
 <p>
+<span>
 <button id="b1" class="lineWidth">1</button>
-<button id="b1" class="lineWidth">2</button>
-<button id="b1" class="lineWidth">5</button>
-<button id="b2" class="lineWidth">10</button>
-<button id="b3" class="lineWidth">15</button>
-<button id="b4" class="lineWidth">25</button>
-<button id="b4" class="lineWidth">50</button>
-<button id="b4" class="lineWidth">100</button>
+<button id="b2" class="lineWidth">2</button>
+<button id="b3" class="lineWidth">5</button>
+<button id="b4" class="lineWidth">10</button>
+<button id="b5" class="lineWidth">15</button>
+<button id="b6" class="lineWidth">25</button>
+<button id="b7" class="lineWidth">50</button>
+<button id="b8" class="lineWidth">100</button>
+</span>
+<span>
+<button class="lineColor">black</button>
+<button class="lineColor">white</button>
+<button class="lineColor">blue</button>
+<button class="lineColor">red</button>
+<button class="lineColor">green</button>
+<button class="lineColor">random color</button>
+</span>
+<span>
+<button class="clearCanvas">clear</button>
+</span>
+  
 <a href="javascript:void(window.open().location = document.getElementsByTagName('canvas')[0].toDataURL('image/png'))">Save drawing</a>
 </p>
-<style media="screen">canvas{border:1px solid #ccc}</style>
-<canvas id="example" height=300 width=300></canvas>
-<p>Press Esc key to toggle multi-touch simulation mode on desktop.
-Pressing Alt engages the second finger.
-Pressing Shift locks the second finger's position relative to the first's.</p>
-<p>Based on <a href="http://www.paulirish.com/demo/multi">http://www.paulirish.com/demo/multi</a></p>
-<!--<p id="simulate"><a href="javascript:void(handleTouch())">Simulate Touch</a></p>-->
-		
+<canvas id="example" height=400 width=300></canvas>
+<p id="simulate">
+  To toggle simulating touch with mouse, press Esc key. For multi-touch, hold down Alt key, or Alt and Shift keys.
+  <!--<a href="javascript:void(handleTouch())">Simulate Touch</a>-->
+</p>
+<p>
+  Based on <a href="http://www.paulirish.com/demo/multi">http://www.paulirish.com/demo/multi</a><br/>
+  Touch simulation from <a href="https://github.com/brian-c/phantom-limb">https://github.com/brian-c/phantom-limb</a>
+</p>
 <script>
 var CanvasDrawr = function (options) {
-	console.log(options);
-	var canvas = document.getElementById(options.id)
-	this.ctxt = canvas.getContext("2d");
-	var ctxt = this.ctxt;
-	this.lineWidth = function(width) { ctxt.lineWidth = width; return ctxt.lineWidth; }
+  console.log(options);
+  var canvas = document.getElementById(options.id)
+  this.ctxt = canvas.getContext("2d");
+  var ctxt = this.ctxt;
+  this.lineWidth = function(width) { ctxt.lineWidth = width; return ctxt.lineWidth; }
+  this.lineColor = function(color) { ctxt.lineColor = color; return ctxt.lineColor; }
+  this.clear = function() { ctxt.clearRect(0, 0, canvas.width, canvas.height); }
   canvas.style.width = '100%';
   canvas.width = canvas.offsetWidth;
   canvas.style.width = '';
-  ctxt.lineWidth = options.size || Math.ceil(Math.random() * 35);
+  ctxt.lineWidth = options.lineWidth || Math.ceil(Math.random() * 35);
   ctxt.lineCap = options.lineCap || "round";
+  ctxt.lineColor = options.lineColor || "black";
   ctxt.pX = undefined;
   ctxt.pY = undefined;
   var lines = [, , ];
@@ -53,8 +73,9 @@ var CanvasDrawr = function (options) {
     preDraw: function (event) {
       $.each(event.touches, function (i, touch) {
         var id = touch.identifier,
-          colors = ["red", "green", "yellow", "blue", "magenta", "orangered"],
-          mycolor = colors[Math.floor(Math.random() * colors.length)];
+	    colors = ["red", "green", "yellow", "blue", "magenta", "orangered"],
+	    mycolor = colors[Math.floor(Math.random() * colors.length)];
+	if (ctxt.lineColor!="random color") { mycolor = ctxt.lineColor; }
         lines[id] = {
           x: this.pageX - offset.left,
           y: this.pageY - offset.top,
@@ -87,33 +108,45 @@ var CanvasDrawr = function (options) {
         x: lines[i].x + changeX,
         y: lines[i].y + changeY
       };
-    }
+    },
   };
   return self.init();
 };
 var drawarea = new CanvasDrawr({
   id: "example",
-  size: 15
+  lineWidth: 5,
+  lineColor : "blue"
 });
-function handleTouch() {
-  if ('ontouchstart' in document.documentElement) {
-    //alert("Your device handles touch already!")
+function simulateTouch(warnTouch) {
+  if (false && warnTouch && 'ontouchstart' in document.documentElement) {
+    // this is no good because my laptop handles touch but not when using an external screen, so I need both
+    console.log("Your device handles touch already!")
   } else {
-    // simulate touch for mouse input using Brian Carstensen's Phantom Limb script https://github.com/brian-c/phantom-limb
-    /*
+    // make it possible to simulate touch for mouse input using Brian Carstensen's Phantom Limb script
     var scriptTag = document.createElement('script');
     scriptTag.type = 'text/javascript';
-	  scriptTag.src = 'phantom-limb.js';
+    scriptTag.src = 'phantom-limb.js';
     document.body.appendChild(scriptTag);
-    */
   }
   //document.getElementById("simulate").style.display = "none";
 }
-function setWidthFromButton() {
-	drawarea.lineWidth(this.innerText)
-}
-$("button.lineWidth").bind({ click: function() { drawarea.lineWidth(this.innerText) } });
-//window.onload = handleTouch;
+  $("button.lineWidth").bind({ click: function() { drawarea.lineWidth(this.innerText);
+						   // presentation stuff: highlight the selected button
+						   var buttons = this.parentNode.children;
+						   for (var i = 0; i < buttons.length; i++) {
+						     buttons[i].style.fontWeight = '';
+						     buttons[i].style.backgroundColor = '';
+						   }
+						   this.style.fontWeight = "bold";
+						   this.style.backgroundColor = "lightgray";
+						 } });
+  $("button.lineColor").bind({ click: function() { drawarea.lineColor(this.innerText);
+						 } });
+  
+  $("button.clearCanvas").bind({ click: function() { drawarea.clear();
+						 } });
+  
+  window.onload = simulateTouch;
 </script>
 </body>
 </html>
