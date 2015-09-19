@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 (function() {
   // Phantom Limb
   // ------------
