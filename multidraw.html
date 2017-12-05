@@ -5,7 +5,18 @@
 <meta charset="UTF-8">
 <script src="jquery-1.9.1.min.js"></script>
 <style media="screen">
-  canvas { border: 1px solid #ccc; }
+  .drawarea {
+    border: 1px solid #ccc;
+  }
+  .drawarea_background {
+    position: relative;
+    top: -100px;
+    z-index: -1;
+    font-size: 8em;
+    opacity: 0.5;
+    background-color: white;
+    font-family: KaiTi, "楷体", SimKai, serif;
+  }
 </style>
 </head>
 <body>
@@ -33,11 +44,17 @@
 </span>
 <span>
 <button class="clearCanvas">clear</button>
+<button classid="saveCanvas">save</button>
 </span>
   
-<a href="javascript:void(window.open().location = document.getElementsByTagName('canvas')[0].toDataURL('image/png'))">Save drawing</a>
+<a href="javascript:void(window.open().location = document.getElementById('example').toDataURL('image/png'))">Save drawing</a>
 </p>
-<canvas id="example" height=400 width=300></canvas>
+
+<canvas id="example" class="drawarea" height="400"></canvas>
+<div id="example_background" class="drawarea_background">
+  台北市大同區敦煌路八十巷一號三樓之二
+</div>
+
 <p id="simulate">
   To toggle simulating touch with mouse, press Esc key. For multi-touch, hold down Alt key, or Alt and Shift keys.
   <!--<a href="javascript:void(handleTouch())">Simulate Touch</a>-->
@@ -49,7 +66,8 @@
 <script>
 var CanvasDrawr = function (options) {
   //console.log(options);
-  var canvas = document.getElementById(options.id)
+  var canvas = document.getElementById(options.id);
+  var canvas_background = document.getElementById(options.id + '_background');
   this.ctxt = canvas.getContext("2d");
   var ctxt = this.ctxt;
   this.lineWidth = function(width) { ctxt.lineWidth = width; return ctxt.lineWidth; }
@@ -58,6 +76,10 @@ var CanvasDrawr = function (options) {
   canvas.style.width = '100%';
   canvas.width = canvas.offsetWidth;
   canvas.style.width = '';
+  canvas.style.height = '300px';
+  canvas.height = canvas.offsetHeight;
+  canvas.style.height = '';
+  canvas_background.style.top = '-300px';
   ctxt.lineWidth = options.lineWidth || Math.ceil(Math.random() * 35);
   ctxt.lineCap = options.lineCap || "round";
   ctxt.lineColor = options.lineColor || "black";
