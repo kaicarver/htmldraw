@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My CSS positioning and sizing tests</title>
+  <script>
+    (function() {
+      function getCookie(name) {
+        var value = "; " + document.cookie;
+        var parts = value.split("; " + name + "=");
+        if (parts.length == 2) return parts.pop().split(";").shift();
+      }
+
+      var ver = getCookie('version') || 'develop',
+          url = 'https://rawgit.com/showdownjs/showdown/' + ver + '/dist/showdown.min.js',
+          scrp = document.createElement('script');
+
+      scrp.setAttribute("type","text/javascript");
+      scrp.src = url;
+      document.getElementsByTagName("head")[0].appendChild(scrp);
+    })();
+    function renderMD() {
+      var doc = document.getElementById('doc'),
+	  converter = new showdown.Converter({simplifiedAutoLink: true}),
+	  text      = doc.innerText,
+	  html      = converter.makeHtml(text);
+      doc.innerHTML = html;
+    }
+    // TODO: generate HTML from text
+    var hanzi = "台北市大同區敦煌路八十巷一號三樓之二",
+	pinyin_sentence = "Táiběi shì dàtóng qū dūnhuáng lù bāshí xiàng yī hào sān lóu zhī èr",
+	pinyin_syllables = "tái běi shì dà tóng qū dūn huáng lù bā shí xiàng yī hào sān lóu zhī èr",
+	pinyin_tones = "2 3 4 2 1 1 2 4 1 1 4 1 4 1 2 1 4",
+	english_sentence = "Taipei City, Datong District, Dunhuang Road, Lane 80, Number one, third floor, Apt. two",
+	english_words = "Taipei City Datong_District Dunhuang Road 80 Lane one Number third floor Apt two",
+	english_syllables = "desk, table, counter/north/market, city/big/same, together/esteem, honest/bright, shining/road/80/lane, alley/1/number/3/floor, story/possessive particle/2";
+  </script>
+  <style>
+    #drawarea { position: relative; height: 120px; width: 25%; border: 1px solid gray; }
+    #hanzi, #pinyin, #english { position: absolute; top: 0px; }
+    #hanzi span { float: left; font-size: 3em; border: 1px solid gray; }
+    #pinyin span { float: left; font-size: 1.2em; color: blue; border: 1px solid red; width: 50px; height: 55px; line-height: 55px; text-align: center; }
+    #english span { float: left; font-size: 0.8em; color: green; border: 1px solid yellow; width: 50px; height: 55px; text-align: center;  }
+    #english span div { text-align: center; position: relative; top: 50%; transform: translateY(-50%); }
+  </style>
+</head>
+<body>
+<p>Time to get some basic HTML/CSS positioning down.</p>
+
+<div id="drawarea">
+  <div id="hanzi">
+    <span>敦</span>
+    <span>煌</span>
+    <span>路</span>
+    <span>路</span>
+    <span>路</span>
+    <span>路</span>
+    <span>路</span>
+  </div>
+  <div id="pinyin">
+    <span>dūn</span>
+    <span>huáng</span>
+    <span>lù</span>
+    <span>lù</span>
+    <span>lù</span>
+    <span>lù</span>
+    <span>lù</span>
+  </div>
+  <div id="english">
+    <span><div>esteem, honest, kind</div></span>
+    <span><div>bright, shining</div></span>
+    <span><div>road</div></span>
+    <span><div>road</div></span>
+    <span><div>road</div></span>
+    <span><div>road</div></span>
+    <span><div>road</div></span>
+  </div>
+</div>
+
+<div id="doc"><pre>
+Here's what I want:
+
+* overlapping, same-sized divs (or other objects, like canvas or svg)
+* divs containing vertically and horizontally centered text that have a specified size and can be used inline like characters
+* using different kinds of text, like Chinese
+* specifically, I want to overlap:
+    * canvas to draw on,
+    * svg with lines to help drawing,
+    * different layers of divs with Chinese text, pinyin, tone marks, translation
+    * ... and have everything line up, somewhat responsively 
+
+Handy tips:
+* http://www.barelyfitz.com/screencast/html-training/css/positioning/
+* http://rawgit.com/kaicarver/HTML5-Audio/master/chartones.html
+</pre></div>
+<div><button onclick="renderMD()">Render Markdown (mainly to activate links)</button></div>
+</body>
+</html>
