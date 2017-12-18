@@ -26,14 +26,25 @@
 	  html      = converter.makeHtml(text);
       doc.innerHTML = html;
     }
-    // TODO: generate HTML from text
-    var hanzi = "台北市大同區敦煌路八十巷一號三樓之二",
-	pinyin_sentence = "Táiběi shì dàtóng qū dūnhuáng lù bāshí xiàng yī hào sān lóu zhī èr",
-	pinyin_syllables = "tái běi shì dà tóng qū dūn huáng lù bā shí xiàng yī hào sān lóu zhī èr",
-	pinyin_tones = "2 3 4 2 1 1 2 4 1 1 4 1 4 1 2 1 4",
-	english_sentence = "Taipei City, Datong District, Dunhuang Road, Lane 80, Number one, third floor, Apt. two",
-	english_words = "Taipei City Datong_District Dunhuang Road 80 Lane one Number third floor Apt two",
-	english_syllables = "desk, table, counter/north/market, city/big/same, together/esteem, honest/bright, shining/road/80/lane, alley/1/number/3/floor, story/possessive particle/2";
+    function generateHTML() {
+      // generate HTML from text
+      var hanzi = "台北市大同區敦煌路八十巷一號三樓之二".split(''),
+	  pinyin_sentence = "Táiběi shì dàtóng qū dūnhuáng lù bāshí xiàng yī hào sān lóu zhī èr",
+	  pinyin_syllables = "tái běi shì dà tóng qū dūn huáng lù bā shí xiàng yī hào sān lóu zhī èr".split(' '),
+	  pinyin_tones = "2 3 4 4 2 1 1 2 4 1 1 4 1 4 1 2 1 4".split(' '),
+	  english_sentence = "Taipei City, Datong District, Dunhuang Road, Lane 80, Number one, third floor, Apt. two",
+	  english_words = "Taipei City Datong_District Dunhuang Road 80 Lane one Number third floor Apt two",
+	  english_syllables = "desk, table, counter/north/market, city/big/same, together/district/esteem, honest/bright, shining/road/8/10/lane, alley/1/number/3/floor, story/possessive particle/2".split('/');
+
+      var h = ['','',''];
+      for (var i= 0; i < hanzi.length; i++) {
+	h[0] += '<span>' + hanzi[i] + '</span>';
+	h[1] += '<span>' + pinyin_syllables[i] + '</span>';
+	h[2] += '<span><div>' + english_syllables[i] + '</div></span>';
+      }
+      document.getElementById('drawarea').innerHTML =
+	'<div id="hanzi">' + h[0] + '</div><div id="pinyin">' + h[1] + '</div><div id="english">' + h[2] + '</div>';
+    }
   </script>
   <style>
     #drawarea { position: relative; height: 120px; width: 25%; border: 1px solid gray; }
@@ -44,7 +55,7 @@
     #english span div { text-align: center; position: relative; top: 50%; transform: translateY(-50%); }
   </style>
 </head>
-<body>
+<body onload="generateHTML()">
 <p>Time to get some basic HTML/CSS positioning down.</p>
 
 <div id="drawarea">
