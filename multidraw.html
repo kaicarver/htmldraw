@@ -17,6 +17,7 @@
     background-color: white;
     font-family: KaiTi, "楷体", SimKai, serif;
   }
+  #saveimg { width: 3em; height: 1.2em; border: 1px solid gray; vertical-align: middle; display: none; }
 </style>
 </head>
 <body>
@@ -43,18 +44,16 @@
 <button id="c_rand"  class="lineColor">random color</button>
 </span>
 <span>
-<button class="clearCanvas">clear</button>
-<button classid="saveCanvas">save</button>
+<button id="clearCanvas">clear</button>
+<button id="saveCanvas">save</button>
 </span>
-  
-<a href="javascript:void(window.open().location = document.getElementById('example').toDataURL('image/png'))">Save drawing</a>
+<img id="saveimg" src="">
 </p>
 
 <canvas id="example" class="drawarea" height="400"></canvas>
 <div id="example_background" class="drawarea_background">
   台北市大同區敦煌路八十巷一號三樓之二
 </div>
-
 <p id="simulate">
   To toggle simulating touch with mouse, press Esc key. For multi-touch, hold down Alt key, or Alt and Shift keys.
   <!--<a href="javascript:void(handleTouch())">Simulate Touch</a>-->
@@ -134,18 +133,28 @@ var CanvasDrawr = function (options) {
   };
   return self.init();
 };
-var drawarea = new CanvasDrawr({
-  id: "example"
-  //lineWidth: 5,
-  //lineColor : "blue"
-  });
-
+var drawarea;
+window.onload = initAll;
 function initAll() {
+  drawarea = new CanvasDrawr({ id: "example" });
+  $("button.lineWidth").bind({ click: function() { drawarea.lineWidth(this.innerText);
+						   highlightButton(this);
+						 } });
+  $("button.lineColor").bind({ click: function() { drawarea.lineColor(this.innerText);
+						   highlightButton(this);
+						 } });
+  $("button#clearCanvas").bind({ click: function() { drawarea.clear();
+						 } });
+  $("button#saveCanvas").bind({
+	click: function() {
+	  var img =  document.getElementById('saveimg');
+	  img.src = document.getElementById('example').toDataURL('image/png');
+	  img.style.display = 'inline-block';
+	} });
   $('#b5').click();
   $('#c_blue').click();
   simulateTouch();
 }
-
 function simulateTouch(warnTouch) {
   if (false && warnTouch && 'ontouchstart' in document.documentElement) {
     // this is no good because my laptop handles touch but not when using an external screen, so I need both
@@ -169,17 +178,6 @@ function highlightButton(button) {
   button.style.fontWeight = "bold";
   button.style.backgroundColor = "lightgray";
 }
-  $("button.lineWidth").bind({ click: function() { drawarea.lineWidth(this.innerText);
-						   highlightButton(this);
-						 } });
-  $("button.lineColor").bind({ click: function() { drawarea.lineColor(this.innerText);
-						   highlightButton(this);
-						 } });
-  
-  $("button.clearCanvas").bind({ click: function() { drawarea.clear();
-						 } });
-  
-  window.onload = initAll;
 </script>
 </body>
 </html>
