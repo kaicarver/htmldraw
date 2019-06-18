@@ -6,13 +6,13 @@
 <script src="jquery-1.9.1.min.js"></script>
   <style media="screen">
   body { margin: 0px; }
-  #header { margin: 0px; text-align: center; }
+  #header, h2 { margin: 0px; text-align: center; }
   .drawarea {
-	position: absolute;
+    position: absolute;
     z-index: 2;
-	border-right: 1px solid #ccc;
-	width: 95vw;
-	height: 100vh;
+    border-right: 1px solid #ccc;
+    width: 95vw;
+    height: 100vh;
   }
   .drawarea_background {
     position: absolute;
@@ -21,17 +21,19 @@
     line-height: 0.95em;
     opacity: 0.5;
     background-color: white;
-	font-family: KaiTi, "楷体", SimKai, serif;
-	overflow: scroll;
-	display: none;
+    font-family: KaiTi, "楷体", SimKai, serif;
+    overflow: scroll;
+    padding-right: 10px;
+    border-right: 3px dashed #ccc;
+    display: none;
   }
   #info {
     position: absolute;
     z-index: 3;
-	border: 3px double #ccc;
-	padding: 10px;
+    border: 3px double #ccc;
+    padding: 10px;
     background-color: white;
-	display: none;
+    display: none;
   }
   #saveimg { width: 3em; height: 1.2em; border: 1px solid gray; vertical-align: middle; }
   #c_black   { color: black; }
@@ -84,30 +86,33 @@
 <div id="info">
   <h2>Multitouch Paint</h2>
   <p>
-	Simple web Paint program.
+    Simple web Paint program.
   </p>
   <p>
-	Buttons to:
-	<ul>
-	  <li>Set line thickness
-	  <li>Set line color (including randomly chosen color)
-	  <li>Clear the canvas
-	  <li>Save the drawing (into a tiny image, that can be copied or saved or opened in a new tab)
-	  <li>Display a background text</li>
-	</ul>
+    Buttons to:
+    <ul>
+      <li>Set line thickness
+      <li>Set line color (including randomly chosen color)
+      <li>Clear the canvas
+      <li>Save the drawing (into a tiny image, that can be copied or saved or opened in a new tab)
+      <li>Display a background text</li>
+    </ul>
   </p>
   <p>
-	Can draw several lines at a time using multitouch.
+    Can draw several lines at a time using multitouch.
   </p>
   <p>
-	To toggle simulating touch with a mouse, press the Esc key. For multi-touch, hold down the Alt key, or the Alt and Shift keys.
+    To toggle simulating touch with a mouse, press the Esc key. For multi-touch, hold down the Alt key, or the Alt and Shift keys.
   </p>
   <p>
-	Based on <a href="http://www.paulirish.com/demo/multi">http://www.paulirish.com/demo/multi</a><br/>
-	Touch simulation from <a href="https://github.com/brian-c/phantom-limb">https://github.com/brian-c/phantom-limb</a>
+    Based on <a href="http://www.paulirish.com/demo/multi">http://www.paulirish.com/demo/multi</a><br/>
+    Touch simulation from <a href="https://github.com/brian-c/phantom-limb">https://github.com/brian-c/phantom-limb</a>
   </p>
   <p>
-	<a href="https://rawgit.com/kaicarver/langlab/master/drawhanzi.html?text=%E5%BF%83%E7%B6%93%E8%A7%80%E8%87%AA%E5%9C%A8%E8%8F%A9%E8%96%A9%E8%A1%8C%E6%B7%B1%E8%88%AC%E8%8B%A5%E6%B3%A2%E7%BE%85%E8%9C%9C%E5%A4%9A%E6%99%82%E7%85%A7%E8%A6%8B%E4%BA%94%E8%98%8A%E7%9A%86%E7%A9%BA%E5%BA%A6%E4%B8%80%E5%88%87%E8%8B%A6%E5%8E%84%E8%88%8D%E5%88%A9%E5%AD%90%E8%89%B2%E4%B8%8D%E7%95%B0%E7%A9%BA%E7%A9%BA%E4%B8%8D%E7%95%B0%E8%89%B2%E8%89%B2%E5%8D%B3%E6%98%AF%E7%A9%BA%E7%A9%BA%E5%8D%B3%E6%98%AF%E8%89%B2%E5%8F%97%E6%83%B3%E8%A1%8C%E8%AD%98%E4%BA%A6%E5%BE%A9%E5%A6%82%E6%98%AF%E8%88%8D%E5%88%A9%E5%AD%90%E6%98%AF%E8%AB%B8%E6%B3%95%E7%A9%BA%E7%9B%B8%E4%B8%8D%E7%94%9F%E4%B8%8D%E6%BB%85%E4%B8%8D%E5%9E%A2%E4%B8%8D%E6%B7%A8%E4%B8%8D%E5%A2%9E%E4%B8%8D%E6%B8%9B%E6%98%AF%E6%95%85%E7%A9%BA%E4%B8%AD%E7%84%A1%E8%89%B2%E7%84%A1%E5%8F%97%E6%83%B3%E8%A1%8C%E8%AD%98%E7%84%A1%E7%9C%BC%E8%80%B3%E9%BC%BB%E8%88%8C%E8%BA%AB%E6%84%8F%E7%84%A1%E8%89%B2%E8%81%B2%E9%A6%99%E5%91%B3%E8%A7%B8%E6%B3%95%E7%84%A1%E7%9C%BC%E7%95%8C%E4%B9%83%E8%87%B3%E7%84%A1%E6%84%8F%E8%AD%98%E7%95%8C%E7%84%A1%E7%84%A1%E6%98%8E%E4%BA%A6%E7%84%A1%E7%84%A1%E6%98%8E%E7%9B%A1%E4%B9%83%E8%87%B3%E7%84%A1%E8%80%81%E6%AD%BB%E4%BA%A6%E7%84%A1%E8%80%81%E6%AD%BB%E7%9B%A1%E7%84%A1%E8%8B%A6%E9%9B%86%E6%BB%85%E9%81%93%E7%84%A1%E6%99%BA%E4%BA%A6%E7%84%A1%E5%BE%97%E4%BB%A5%E7%84%A1%E6%89%80%E5%BE%97%E6%95%85%E8%8F%A9%E6%8F%90%E8%96%A9%E5%9F%B5%E4%BE%9D%E8%88%AC%E8%8B%A5%E6%B3%A2%E7%BE%85%E8%9C%9C%E5%A4%9A%E6%95%85%E5%BF%83%E7%84%A1%E6%8E%9B%E7%A4%99%E7%84%A1%E6%8E%9B%E7%A4%99%E6%95%85%E7%84%A1%E6%9C%89%E6%81%90%E6%80%96%E9%81%A0%E9%9B%A2%E9%A1%9B%E5%80%92%E5%A4%A2%E6%83%B3%E7%A9%B6%E7%AB%9F%E6%B6%85%E6%A7%83%E4%B8%89%E4%B8%96%E8%AB%B8%E4%BD%9B%E4%BE%9D%E8%88%AC%E8%8B%A5%E6%B3%A2%E7%BE%85%E8%9C%9C%E5%A4%9A%E6%95%85%E5%BE%97%E9%98%BF%E8%80%A8%E5%A4%9A%E7%BE%85%E4%B8%89%E8%97%90%E4%B8%89%E8%8F%A9%E6%8F%90%E6%95%85%E7%9F%A5%E8%88%AC%E8%8B%A5%E6%B3%A2%E7%BE%85%E8%9C%9C%E5%A4%9A%E6%98%AF%E5%A4%A7%E7%A5%9E%E5%92%92%E6%98%AF%E5%A4%A7%E6%98%8E%E5%92%92%E6%98%AF%E7%84%A1%E4%B8%8A%E5%92%92%E6%98%AF%E7%84%A1%E7%AD%89%E7%AD%89%E5%92%92%E8%83%BD%E9%99%A4%E4%B8%80%E5%88%87%E8%8B%A6%E7%9C%9F%E5%AF%A6%E4%B8%8D%E8%99%9B%E6%95%85%E8%AA%AA%E8%88%AC%E8%8B%A5%E6%B3%A2%E7%BE%85%E8%9C%9C%E5%A4%9A%E5%92%92%E5%8D%B3%E8%AA%AA%E5%92%92%E6%9B%B0%E6%8F%AD%E8%AB%A6%E6%8F%AD%E8%AB%A6%E6%B3%A2%E7%BE%85%E6%8F%AD%E8%AB%A6%E6%B3%A2%E7%BE%85%E5%83%A7%E6%8F%AD%E8%AB%A6%E8%8F%A9%E6%8F%90%E8%96%A9%E5%A9%86%E8%A8%B6">Chinese character writing example</a>
+    <a href="https://rawgit.com/kaicarver/langlab/master/drawhanzi.html?text=%E5%BF%83%E7%B6%93%E8%A7%80%E8%87%AA%E5%9C%A8%E8%8F%A9%E8%96%A9%E8%A1%8C%E6%B7%B1%E8%88%AC%E8%8B%A5%E6%B3%A2%E7%BE%85%E8%9C%9C%E5%A4%9A%E6%99%82%E7%85%A7%E8%A6%8B%E4%BA%94%E8%98%8A%E7%9A%86%E7%A9%BA%E5%BA%A6%E4%B8%80%E5%88%87%E8%8B%A6%E5%8E%84%E8%88%8D%E5%88%A9%E5%AD%90%E8%89%B2%E4%B8%8D%E7%95%B0%E7%A9%BA%E7%A9%BA%E4%B8%8D%E7%95%B0%E8%89%B2%E8%89%B2%E5%8D%B3%E6%98%AF%E7%A9%BA%E7%A9%BA%E5%8D%B3%E6%98%AF%E8%89%B2%E5%8F%97%E6%83%B3%E8%A1%8C%E8%AD%98%E4%BA%A6%E5%BE%A9%E5%A6%82%E6%98%AF%E8%88%8D%E5%88%A9%E5%AD%90%E6%98%AF%E8%AB%B8%E6%B3%95%E7%A9%BA%E7%9B%B8%E4%B8%8D%E7%94%9F%E4%B8%8D%E6%BB%85%E4%B8%8D%E5%9E%A2%E4%B8%8D%E6%B7%A8%E4%B8%8D%E5%A2%9E%E4%B8%8D%E6%B8%9B%E6%98%AF%E6%95%85%E7%A9%BA%E4%B8%AD%E7%84%A1%E8%89%B2%E7%84%A1%E5%8F%97%E6%83%B3%E8%A1%8C%E8%AD%98%E7%84%A1%E7%9C%BC%E8%80%B3%E9%BC%BB%E8%88%8C%E8%BA%AB%E6%84%8F%E7%84%A1%E8%89%B2%E8%81%B2%E9%A6%99%E5%91%B3%E8%A7%B8%E6%B3%95%E7%84%A1%E7%9C%BC%E7%95%8C%E4%B9%83%E8%87%B3%E7%84%A1%E6%84%8F%E8%AD%98%E7%95%8C%E7%84%A1%E7%84%A1%E6%98%8E%E4%BA%A6%E7%84%A1%E7%84%A1%E6%98%8E%E7%9B%A1%E4%B9%83%E8%87%B3%E7%84%A1%E8%80%81%E6%AD%BB%E4%BA%A6%E7%84%A1%E8%80%81%E6%AD%BB%E7%9B%A1%E7%84%A1%E8%8B%A6%E9%9B%86%E6%BB%85%E9%81%93%E7%84%A1%E6%99%BA%E4%BA%A6%E7%84%A1%E5%BE%97%E4%BB%A5%E7%84%A1%E6%89%80%E5%BE%97%E6%95%85%E8%8F%A9%E6%8F%90%E8%96%A9%E5%9F%B5%E4%BE%9D%E8%88%AC%E8%8B%A5%E6%B3%A2%E7%BE%85%E8%9C%9C%E5%A4%9A%E6%95%85%E5%BF%83%E7%84%A1%E6%8E%9B%E7%A4%99%E7%84%A1%E6%8E%9B%E7%A4%99%E6%95%85%E7%84%A1%E6%9C%89%E6%81%90%E6%80%96%E9%81%A0%E9%9B%A2%E9%A1%9B%E5%80%92%E5%A4%A2%E6%83%B3%E7%A9%B6%E7%AB%9F%E6%B6%85%E6%A7%83%E4%B8%89%E4%B8%96%E8%AB%B8%E4%BD%9B%E4%BE%9D%E8%88%AC%E8%8B%A5%E6%B3%A2%E7%BE%85%E8%9C%9C%E5%A4%9A%E6%95%85%E5%BE%97%E9%98%BF%E8%80%A8%E5%A4%9A%E7%BE%85%E4%B8%89%E8%97%90%E4%B8%89%E8%8F%A9%E6%8F%90%E6%95%85%E7%9F%A5%E8%88%AC%E8%8B%A5%E6%B3%A2%E7%BE%85%E8%9C%9C%E5%A4%9A%E6%98%AF%E5%A4%A7%E7%A5%9E%E5%92%92%E6%98%AF%E5%A4%A7%E6%98%8E%E5%92%92%E6%98%AF%E7%84%A1%E4%B8%8A%E5%92%92%E6%98%AF%E7%84%A1%E7%AD%89%E7%AD%89%E5%92%92%E8%83%BD%E9%99%A4%E4%B8%80%E5%88%87%E8%8B%A6%E7%9C%9F%E5%AF%A6%E4%B8%8D%E8%99%9B%E6%95%85%E8%AA%AA%E8%88%AC%E8%8B%A5%E6%B3%A2%E7%BE%85%E8%9C%9C%E5%A4%9A%E5%92%92%E5%8D%B3%E8%AA%AA%E5%92%92%E6%9B%B0%E6%8F%AD%E8%AB%A6%E6%8F%AD%E8%AB%A6%E6%B3%A2%E7%BE%85%E6%8F%AD%E8%AB%A6%E6%B3%A2%E7%BE%85%E5%83%A7%E6%8F%AD%E8%AB%A6%E8%8F%A9%E6%8F%90%E8%96%A9%E5%A9%86%E8%A8%B6">Chinese character writing example</a>
+  </p>
+  <p>
+	<a href="https://github.com/kaicarver/htmldraw/blob/master/multidraw.html">Source code on Github</a>
   </p>
 </div>
 </div>
@@ -129,10 +134,10 @@ var CanvasDrawr = function (options) {
   canvas_background.style.width = (canvas.getBoundingClientRect().width + 10)+'px';
   canvas_background.style.height = canvas.getBoundingClientRect().height+'px';
   var indent = 100;
-  info.style.top = (canvas.getBoundingClientRect().top+indent)+'px';
+  info.style.top = (canvas.getBoundingClientRect().top+indent/2)+'px';
   info.style.left = (canvas.getBoundingClientRect().left+indent)+'px';
-  info.style.width = (canvas.getBoundingClientRect().width-2.5*indent)+'px';
-  info.style.height = (canvas.getBoundingClientRect().height-2.5*indent)+'px';
+  info.style.width = (canvas.getBoundingClientRect().width-2*indent)+'px';
+  info.style.height = (canvas.getBoundingClientRect().height-2*indent)+'px';
   ctxt.lineWidth = options.lineWidth || Math.ceil(Math.random() * 35);
   ctxt.lineCap = options.lineCap || "round";
   ctxt.lineColor = options.lineColor || "black";
@@ -148,9 +153,9 @@ var CanvasDrawr = function (options) {
     preDraw: function (event) {
       $.each(event.touches, function (i, touch) {
         var id = touch.identifier,
-	    colors = ["red", "green", "yellow", "blue", "magenta", "orangered"],
-	    mycolor = colors[Math.floor(Math.random() * colors.length)];
-	if (ctxt.lineColor != "rand") { mycolor = ctxt.lineColor; }
+        colors = ["red", "green", "yellow", "blue", "magenta", "orangered"],
+        mycolor = colors[Math.floor(Math.random() * colors.length)];
+    if (ctxt.lineColor != "rand") { mycolor = ctxt.lineColor; }
         lines[id] = {
           x: this.pageX - offset.left,
           y: this.pageY - offset.top,
@@ -192,28 +197,28 @@ window.onload = initAll;
 function initAll() {
   drawarea = new CanvasDrawr({ id: "example" });
   $("button.lineWidth").bind({ click: function() { drawarea.lineWidth(this.innerText);
-						   highlightButton(this);
-						 } });
+                           highlightButton(this);
+                         } });
   $("button.lineColor").bind({ click: function() { drawarea.lineColor(this.id.replace('c_',''));
-						   highlightButton(this);
-						 } });
+                           highlightButton(this);
+                         } });
   $("button#background").bind({
-	click: function() {
-	  var b = document.getElementById('example_background');
-	  b.style.display = b.style.display.match(/^$|^none$/)  ? 'block' : 'none';
-	} });
+    click: function() {
+      var b = document.getElementById('example_background');
+      b.style.display = b.style.display.match(/^$|^none$/)  ? 'block' : 'none';
+    } });
   $("button#infobutton").bind({
-	click: function() {
-	  var b = document.getElementById('info');
-	  b.style.display = b.style.display.match(/^$|^none$/)  ? 'block' : 'none';
-	} });
+    click: function() {
+      var b = document.getElementById('info');
+      b.style.display = b.style.display.match(/^$|^none$/)  ? 'block' : 'none';
+    } });
   $("button#clearCanvas").bind({ click: function() { drawarea.clear(); } });
   $("button#saveCanvas").bind({
-	click: function() {
-	  var img =  document.getElementById('saveimg');
-	  img.src = document.getElementById('example').toDataURL('image/png');
-	  img.style.display = 'inline-block';
-	} });
+    click: function() {
+      var img =  document.getElementById('saveimg');
+      img.src = document.getElementById('example').toDataURL('image/png');
+      img.style.display = 'inline-block';
+    } });
   $('#b5').click();
   $('#c_blue').click();
   simulateTouch();
